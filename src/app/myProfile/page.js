@@ -1,0 +1,113 @@
+"use client";
+import { useEffect, useState } from "react";
+import CustomerHeader from "../_components/CustomerHeader";
+import Footer from "../_components/Footer";
+
+const MyProfile = () => {
+  const [loading, setLoading] = useState(false);
+  const [myOrders, setMyOrders] = useState([]);
+
+  useEffect(() => {
+    fetchMyOrders();
+  }, []);
+
+  const fetchMyOrders = async () => {
+    const userId = JSON.parse(localStorage.getItem("user"))._id;
+    // console.log("userId", userId);
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/order?id=${userId}`
+      );
+
+      const res = await response.json();
+      // console.log("response", res.result);
+
+      if (res.success) {
+        setMyOrders(Array.isArray(res.result) ? res.result : [res.result]);
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <CustomerHeader />
+      <div className="flex-grow">
+        <div className="my-10 max-w-[90%] mx-auto">
+          <h3 className="h3-gradient py-4 text-center">My Orders</h3>
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <div className="loader"></div>
+            </div>
+          ) : (
+            <div className="w-full mt-5">
+              {myOrders.length > 0 ? (
+                <div className="flex flex-wrap gap-5">
+                  {myOrders.map((order, index) => (
+                    <div
+                      key={index}
+                      className="w-full md:w-[40%] lg:w-[45%] mx-auto cursor-pointer"
+                    >
+                      <div className="relative group w-full">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 via-orange-600 to-orange-800 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                        <div className="relative px-7 py-6 bg-white ring-1 ring-orange-500 rounded-lg leading-none">
+                          <h4 className="text-2xl font-semibold gradient-text mb-1">
+                            {order?.data?.restaurant_name ||
+                              "Unknown Restaurant"}
+                          </h4>
+                          <p className="-mt-2 text-sm text-gray-500 mb-2">
+                            {order?.data?.full_address || "No Address"}{" "}
+                            {order?.data?.city || ""}
+                          </p>
+                          <p className="text-gray-600 text-sm">
+                            📞 {order?.data?.contact || "N/A"}
+                          </p>
+                          <p className="text-gray-600 text-sm">
+                            📧 {order?.data?.email || "N/A"}
+                          </p>
+                          <div className="flex justify-between items-center mt-2">
+                            <span className="text-lg font-semibold">
+                              Total:
+                            </span>
+                            <span className="text-xl font-bold text-green-600">
+                              ₹{order?.amount || "0"}
+                            </span>
+                          </div>
+                          <div className="mt-4 flex items-center justify-between">
+                            <span className="text-gray-700 font-semibold">
+                              Status:
+                            </span>
+                            <span
+                              className={`px-3 py-1 text-sm font-semibold rounded-full ${
+                                order?.status === "confirm"
+                                  ? "bg-green-200 text-green-700"
+                                  : "bg-red-200 text-red-700"
+                              }`}
+                            >
+                              {order?.status || "Pending"}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center text-lg text-red-600">
+                  No Orders Found
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default MyProfile;
