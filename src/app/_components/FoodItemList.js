@@ -11,6 +11,7 @@ const FoodItemList = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [foodIdToEdit, setFoodIdToEdit] = useState(null);
   const [restaurantId, setRestaurantId] = useState(null);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -47,7 +48,7 @@ const FoodItemList = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/restaurant/foods/${foodId}`,
+        `${API_BASE_URL}/api/restaurant/foods/${foodId}`,
         { method: "DELETE" }
       );
       const res = await response.json();

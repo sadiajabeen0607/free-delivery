@@ -17,6 +17,7 @@ const Page = () => {
   const params = useParams();
   const searchParams = useSearchParams();
   const restaurantId = searchParams.get("id");
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   // console.log("RestaurantId", restaurantId);
 
   // console.log("foodIds", foodIds);
@@ -66,7 +67,7 @@ const Page = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/customers/${restaurantId}`
+        `${API_BASE_URL}/api/customers/${restaurantId}`
       );
 
       const res = await response.json();

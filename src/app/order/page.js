@@ -13,6 +13,7 @@ const Cart = () => {
   const [removeCart, setRemoveCart] = useState(false);
   const [cartLoaded, setCartLoaded] = useState(false);
   const router = useRouter();
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -52,7 +53,7 @@ console.log("cartLength", cartStorage.length);
     let foodItemsIds = cart.map((item) => item._id).toString();
     let restaurant_id = cart[0].restaurant_id;
 
-    let deliveryBoyResponse = await fetch(`http://localhost:3000/api/deliveryPartners/${city}`);
+    let deliveryBoyResponse = await fetch(`${API_BASE_URL}/api/deliveryPartners/${city}`);
     deliveryBoyResponse = await deliveryBoyResponse.json();
     let deliveryBoysIds = deliveryBoyResponse.result.map((item) => item._id);
     let deliveryBoy_id = deliveryBoysIds[Math.floor(Math.random() * deliveryBoysIds.length)];
@@ -73,7 +74,7 @@ console.log("cartLength", cartStorage.length);
 
     // console.log("orderDetails", orderDetails);
 
-    const response = await fetch(`http://localhost:3000/api/order`, {
+    const response = await fetch(`${API_BASE_URL}/api/order`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderDetails),

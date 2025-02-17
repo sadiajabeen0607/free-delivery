@@ -6,6 +6,7 @@ import Footer from "../_components/Footer";
 const MyProfile = () => {
   const [loading, setLoading] = useState(false);
   const [myOrders, setMyOrders] = useState([]);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     fetchMyOrders();
@@ -18,7 +19,7 @@ const MyProfile = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/order?id=${userId}`
+        `${API_BASE_URL}/api/order?id=${userId}`
       );
 
       const res = await response.json();

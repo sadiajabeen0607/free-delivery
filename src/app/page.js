@@ -11,6 +11,7 @@ export default function Home() {
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [restaurants, setRestaurants] = useState([]);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     FetchLocations();
@@ -21,7 +22,7 @@ export default function Home() {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/customers/locations`
+        `${API_BASE_URL}/api/customers/locations`
       );
 
       const res = await response.json();
@@ -42,7 +43,7 @@ export default function Home() {
     
     try {
       setLoading(true);
-      let url = "http://localhost:3000/api/customers";
+      let url = `${API_BASE_URL}/api/customers`;
       if(params?.location) {
         url = `${url}?location=${params.location}`
       } else if(params?.restaurant) {

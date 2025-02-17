@@ -8,6 +8,7 @@ const Dashboard = () => {
   const router = useRouter();
    const [loading, setLoading] = useState(false);
     const [myOrders, setMyOrders] = useState([]);
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   
     useEffect(() => {
       fetchMyOrders();
@@ -20,7 +21,7 @@ const Dashboard = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:3000/api/deliveryPartners/orders/${deliveryBoy_id}`
+          `${API_BASE_URL}/api/deliveryPartners/orders/${deliveryBoy_id}`
         );
   
         const res = await response.json();

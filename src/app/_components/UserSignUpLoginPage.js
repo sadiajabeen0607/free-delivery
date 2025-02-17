@@ -22,6 +22,7 @@ const LoginSignUp = () => {
   const router = useRouter();
   const seatchParams = useSearchParams();
   const order = seatchParams.get("order");
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,13 +64,13 @@ const LoginSignUp = () => {
           return;
         }
   
-        response = await fetch("http://localhost:3000/api/user", {
+        response = await fetch(`${API_BASE_URL}/api/user`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });
       } else {
-        response = await fetch("http://localhost:3000/api/user", {
+        response = await fetch(`${API_BASE_URL}/api/user`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...data, login: true }),

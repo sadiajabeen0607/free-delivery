@@ -3,7 +3,9 @@ import InputField from "./inputField";
 import { toast } from "react-toastify";
 
 const EditFoodItem = ({ id, setShowEditModal, fetchFoodItems }) => {
-  console.log("id", id);
+  // console.log("id", id);
+  
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [loading, setLoading] = useState(false);
   const [dataToUpdate, setDataToUpdate] = useState({
@@ -17,7 +19,7 @@ const EditFoodItem = ({ id, setShowEditModal, fetchFoodItems }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/restaurant/foods/edit/${id}`
+        `${API_BASE_URL}/api/restaurant/foods/edit/${id}`
       );
       const res = await response.json();
       // console.log("response", res);
@@ -53,7 +55,7 @@ const EditFoodItem = ({ id, setShowEditModal, fetchFoodItems }) => {
       setLoading(true);
 
       const response = await fetch(
-        `http://localhost:3000/api/restaurant/foods/edit/${id}`,
+        `${API_BASE_URL}/api/restaurant/foods/edit/${id}`,
         {
           method: "PUT",
           headers: {

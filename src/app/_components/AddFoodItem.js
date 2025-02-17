@@ -38,6 +38,8 @@ const AddFoodItem = ({ setAddFood }) => {
     e.preventDefault();
 
     setLoading(true);
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
     if (
       !data.food_name ||
       !data.food_price ||
@@ -50,7 +52,7 @@ const AddFoodItem = ({ setAddFood }) => {
     }
     try {
       const response = await fetch(
-        "http://localhost:3000/api/restaurant/foods",
+        `${API_BASE_URL}/api/restaurant/foods`,
         {
           method: "POST",
           body: JSON.stringify({ ...data, restaurant_id }),
