@@ -33,7 +33,7 @@ const CustomerHeader = ({ cartData, removeCartData, removeCart }) => {
           prevCart.length > 0 &&
           prevCart[0]?.restaurant_id !== newRestaurantId
         ) {
-          // 🛑 Restaurant changed, clear cart
+          // Restaurant changed, clear cart
           const updatedCart = [cartData];
           localStorage.setItem("cart", JSON.stringify(updatedCart));
           setCartItemsNumber(updatedCart.length);
@@ -82,7 +82,7 @@ const CustomerHeader = ({ cartData, removeCartData, removeCart }) => {
     },
     { name: "Partner", href: "/deliveryPartner", title: "Delivery Partner" },
     !user
-      ? { name: "SignUp/Login", href: "/user-auth", title: "SignUp/LoginUser" }
+      ? { name: "SignUp/Login", href: "/user-auth", title: "SignUp/Login" }
       : {
           name: `${user.username}`,
           href: "/myProfile",
@@ -98,9 +98,9 @@ const CustomerHeader = ({ cartData, removeCartData, removeCart }) => {
   };
 
   return (
-    <div className="bg-[#150D0B] h-[120px] z-20">
-      <div className="w-full md:max-w-[90%] mx-auto ">
-        <div className="p-2 px-4 ms:px-8 flex items-center justify-between">
+    <div className="bg-[#150D0B] z-20">
+      <div className="w-full md:max-w-[90%] mx-auto">
+        <div className="flex items-center justify-between px-6 md:px-12">
           {/* Logo */}
           <Logo />
           {/* Navigation Links */}
@@ -110,7 +110,7 @@ const CustomerHeader = ({ cartData, removeCartData, removeCart }) => {
                 <Link
                   href={item.href}
                   title={item.title}
-                  className={`transition-colors duration-300 text-lg font-medium  ${
+                  className={`transition-colors duration-300 text-xs sm:text-base font-medium  ${
                     pathname === item.href
                       ? "text-orange-500"
                       : "text-white hover:text-orange-500"

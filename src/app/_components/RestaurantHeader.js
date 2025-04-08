@@ -36,8 +36,9 @@ const RestaurantHeader = () => {
   }
 
   return (
-    <div className="bg-[#150D0B] h-[120px] z-20">
-      <div className="md:max-w-[90%] mx-auto p-2 flex items-center justify-between">
+    <div className="bg-[#150D0B] z-20">
+      <div className="md:max-w-[90%] mx-auto">
+      <div className="flex items-center justify-between px-6 md:px-12">
       {/* Logo */}
         <Logo />
       {/* Navigation Links */}
@@ -46,7 +47,7 @@ const RestaurantHeader = () => {
           <li key={item.name} className="group relative">
             <Link
               href={item.href}
-              className={`transition-colors duration-300 text-lg font-medium  ${
+              className={`transition-colors duration-300 text-xs lg:text-lg font-medium ${
                 pathname === item.href
                   ? "text-orange-500" 
                   : "text-white hover:text-orange-500"
@@ -68,6 +69,7 @@ const RestaurantHeader = () => {
         ) : null}
       </ul>
       </div>
+    </div>
     </div>
   );
 };

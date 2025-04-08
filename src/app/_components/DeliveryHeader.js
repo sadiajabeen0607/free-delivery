@@ -37,9 +37,9 @@ const DeliveryHeader = () => {
     };
 
   return (
-    <div className="bg-[#150D0B] h-[105px] md:h-[120px] z-20">
+    <div className="bg-[#150D0B] z-20">
       <div className="w-full md:max-w-[90%] mx-auto ">
-        <div className="p-2 px-4 ms:px-8 flex items-center justify-between">
+        <div className="flex items-center justify-between px-6 md:px-12">
           {/* Logo */}
           <Logo />
           {/* Navigation Links */}

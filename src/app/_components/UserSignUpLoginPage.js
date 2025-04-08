@@ -125,6 +125,7 @@ const LoginSignUp = () => {
   
 
   return (
+    <div className="p-4">
     <div className="relative max-w-[600px] w-full mx-auto mt-8 my-10 p-[2px] rounded-md bg-gradient hover:shadow-lg hover:shadow-orange-500 transition-all duration-300">
       <div className="bg-white rounded-md p-5">
         <h3 className="text-3xl text-center my-4 gradient-text font-semibold">
@@ -280,6 +281,7 @@ const LoginSignUp = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };
